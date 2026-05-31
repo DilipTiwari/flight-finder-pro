@@ -132,7 +132,7 @@ export async function searchFlightOffers(params: SearchParams): Promise<SearchRe
       };
     });
 
-    const airlineCodes = uniqueSorted(
+    const airlineCodes = uniqueSorted<string>(
       itineraries.flatMap((itinerary: any) => itinerary.segments.map((segment: any) => segment.carrierCode))
     );
 
@@ -175,3 +175,4 @@ export async function searchFlightOffers(params: SearchParams): Promise<SearchRe
     }
   };
 }
+
