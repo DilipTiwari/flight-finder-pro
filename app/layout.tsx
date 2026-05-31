@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
+import Script from 'next/script';
 import './globals.css';
 import Analytics from '@/components/Analytics';
 import CookieConsent from '@/components/CookieConsent';
@@ -17,10 +18,27 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Script
+          id="travelpayouts-drive"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var script = document.createElement("script");
+                script.async = 1;
+                script.src = 'https://tp-em.com/NTM0NzEz.js?t=534713';
+                document.head.appendChild(script);
+              })();
+            `
+          }}
+        />
+
         <Suspense fallback={null}>
           <Analytics measurementId={gaId} />
         </Suspense>
+
         {children}
+
         <CookieConsent />
       </body>
     </html>
